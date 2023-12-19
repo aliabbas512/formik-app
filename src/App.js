@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -41,13 +40,14 @@ function App() {
         <Typography variant="h4" gutterBottom>
           Register New Account
         </Typography>
+        <br/>
         {/* Form Validation with Formik */}
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, errors, touched }) => (
             <Form>
               <Grid container spacing={2} justifyContent="center" alignItems="center" direction="column">
                 <Grid item xs={12}>
@@ -59,8 +59,9 @@ function App() {
                     variant="outlined"
                     placeholder="Enter your full name"
                     fullWidth
+                    error={errors.fullname && touched.fullname}
+                    helperText={<ErrorMessage name="fullname" />}
                   />
-                  <ErrorMessage name="fullname" component="div" />
                 </Grid>
 
                 <Grid item xs={12}>
@@ -72,8 +73,9 @@ function App() {
                     variant="outlined"
                     placeholder="Enter your email"
                     fullWidth
+                    error={errors.email && touched.email}
+                    helperText={<ErrorMessage name="email" />}
                   />
-                  <ErrorMessage name="email" component="div" />
                 </Grid>
 
                 <Grid item xs={12}>
@@ -85,8 +87,9 @@ function App() {
                     variant="outlined"
                     placeholder="Enter your password"
                     fullWidth
+                    error={errors.password && touched.password}
+                    helperText={<ErrorMessage name="password" />}
                   />
-                  <ErrorMessage name="password" component="div" />
                 </Grid>
 
                 <Grid item xs={12}>
